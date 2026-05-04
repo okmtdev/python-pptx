@@ -7,7 +7,7 @@
 実行:
     rye run python src/sample/matchday_batch.py
 出力:
-    matchday_batch.pptx (試合数ぶんのスライド)
+    matchday_batch.pptx, matchday_batch.pdf
 """
 
 from pptx import Presentation
@@ -15,6 +15,8 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
+
+from pdf_export import convert_to_pdf
 
 
 # プレミアリーグ第35節を想定したダミーデータ
@@ -191,6 +193,8 @@ def build():
     out = "matchday_batch.pptx"
     prs.save(out)
     print(f"saved: {out}  ({len(FIXTURES)} matches + 1 cover)")
+    pdf = convert_to_pdf(out)
+    print(f"saved: {pdf.name}")
 
 
 if __name__ == "__main__":

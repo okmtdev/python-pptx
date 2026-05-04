@@ -6,7 +6,7 @@ simple 版にスタジアム・観客数・得点者リスト・節（matchday�
 実行:
     rye run python src/sample/match_detailed.py
 出力:
-    match_detailed.pptx
+    match_detailed.pptx, match_detailed.pdf
 """
 
 from pptx import Presentation
@@ -14,6 +14,8 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
+
+from pdf_export import convert_to_pdf
 
 
 MATCH = {
@@ -146,6 +148,8 @@ def build():
     out = "match_detailed.pptx"
     prs.save(out)
     print(f"saved: {out}")
+    pdf = convert_to_pdf(out)
+    print(f"saved: {pdf.name}")
 
 
 if __name__ == "__main__":

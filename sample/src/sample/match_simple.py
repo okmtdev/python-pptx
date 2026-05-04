@@ -6,7 +6,7 @@
 実行:
     rye run python src/sample/match_simple.py
 出力:
-    match_simple.pptx
+    match_simple.pptx, match_simple.pdf
 """
 
 from pptx import Presentation
@@ -14,6 +14,8 @@ from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
+
+from pdf_export import convert_to_pdf
 
 
 # 試合データ（ダミー）
@@ -101,6 +103,8 @@ def build():
     out = "match_simple.pptx"
     prs.save(out)
     print(f"saved: {out}")
+    pdf = convert_to_pdf(out)
+    print(f"saved: {pdf.name}")
 
 
 if __name__ == "__main__":
